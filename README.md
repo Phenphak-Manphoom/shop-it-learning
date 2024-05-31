@@ -1,0 +1,1 @@
+I practiced making this project following a Udemy course
