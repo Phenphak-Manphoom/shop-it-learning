@@ -6,6 +6,13 @@ import errorMiddleware from "./middlewares/errors.js";
 
 const app = express();
 
+//handle uncaught exceptions
+process.on("uncaughtException", (err) => {
+  console.log(`ERROR: ${err}`);
+  console.log("Shutting down server due to uncaught exceptions ");
+  process.exit(1);
+});
+
 dotenv.config({ path: "backend/config/config.env" }); // จะโหลดค่าจากไฟล์ .env ที่อยู่ในโฟลเดอร์ backend/config/ โดยระบุตำแหน่งของไฟล์ .env ที่จะถูกโหลดด้วยพารามิเตอร์ path ในนี้คือ "backend/config/config.env"
 
 //connecting to database
