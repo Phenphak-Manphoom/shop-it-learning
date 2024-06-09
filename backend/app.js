@@ -7,6 +7,7 @@ import errorMiddleware from "./middlewares/errors.js";
 const app = express();
 
 //handle uncaught exceptions
+
 process.on("uncaughtException", (err) => {
   console.log(`ERROR: ${err}`);
   console.log("Shutting down server due to uncaught exceptions ");
