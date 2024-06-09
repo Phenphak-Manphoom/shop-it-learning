@@ -14,10 +14,19 @@ app.use(express.json()); //middleware เพื่อช่วยในการ
 app.use("/api", productRoutes);
 
 //using error middleware
-app.use(errorMiddleware)
+app.use(errorMiddleware);
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(
     `Server start on PORT : ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
   );
+});
+
+//Handle Unhandled Promise rejections
+process.on("unhandledRejection", (err) => {
+  console.log(`Error: ${err}`);
+  console.log("Shutting down server due to Unhandled Promise Rejection ");
+  server.close(() => {
+    process.exit(1);
+  });
 });
