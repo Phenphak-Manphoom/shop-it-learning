@@ -7,13 +7,28 @@ class APIFilters {
     const keyword = this.queryStr.keyword
       ? {
           name: {
-            //โอเปอเรเตอร์เหล่านี้อยู่ใน MongoDB
-            $regex: this.queryStr.keyword, //ค้นหาแบบไม่ตรงกันทุกตัว
-            $options: "i", //ไม่สนตัวพิมพ์เล็กหรือใหญ่
+            $regex: this.queryStr.keyword,
+            $options: "i",
           },
         }
       : {};
     this.query = this.query.find({ ...keyword });
+    return this;
+  }
+
+  filters() {
+    const queryCopy = { ...this.queryStr };
+
+    //fields to remove
+    const fieldsToRemove = ["keyword"];
+    fieldsToRemove.forEach((el) => delete queryCopy[el]);
+
+    // advance filter for price ,ratings etc
+
+    let queryStr = JSON.stringify(queryCopy);
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (match) => `$${match}`);
+
+    this.query = this.query.find(JSON.parse(queryStr));
     return this;
   }
 }
