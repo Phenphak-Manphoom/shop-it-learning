@@ -5,7 +5,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 
 // get all products   =>  /api/products
 export const getProducts = catchAsyncError(async (req, res) => {
-  const apiFilters = new APIFilters(Product, req.query).search();
+  const apiFilters = new APIFilters(Product, req.query).search().filters();
   let products = await apiFilters.query;
   let filteredProductCount = products.length;
   res.status(200).json({
