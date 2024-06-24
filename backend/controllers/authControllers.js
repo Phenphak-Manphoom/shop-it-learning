@@ -142,3 +142,17 @@ export const updatePassword = catchAsyncError(async (req, res, next) => {
     success: true,
   });
 });
+
+//update user profile=> /api/me/update
+export const updateProfile = catchAsyncError(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+  const user = await User.findByIdAndUpdate(req.user._id, newUserData, {
+    new: true,
+  });
+  res.status(200).json({
+    user,
+  });
+});
