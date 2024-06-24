@@ -7,6 +7,7 @@ import {
   registerUser,
   resetPassword,
   updatePassword,
+  updateProfile,
 } from "../controllers/authControllers.js";
 import { isAuthenticatedUser } from "../middlewares/auth.js";
 
@@ -19,6 +20,7 @@ authRoutes.route("/password/forgot").post(forgotPassword);
 authRoutes.route("/password/reset/:token").put(resetPassword);
 
 authRoutes.route("/me").get(isAuthenticatedUser, getUserProfile);
+authRoutes.route("/me/update").put(isAuthenticatedUser, updateProfile);
 authRoutes.route("/password/update").put(isAuthenticatedUser, updatePassword);
 
 export default authRoutes;
