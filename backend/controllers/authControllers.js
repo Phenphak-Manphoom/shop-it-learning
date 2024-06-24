@@ -1,7 +1,7 @@
 import catchAsyncError from "../middlewares/catchAsyncError.js";
 import User from "../models/user.js";
 import { getResetPasswordTemplate } from "../utils/emailTemplate.js";
-import ErrorHandle from "../utils/errorHandler.js";
+import ErrorHandler from "../utils/errorHandler.js";
 import sendEmail from "../utils/sendEmail.js";
 import sendToken from "../utils/sendToken.js";
 import crypto from "crypto";
@@ -123,5 +123,22 @@ export const getUserProfile = catchAsyncError(async (req, res, next) => {
 
   res.status(200).json({
     user,
+  });
+});
+
+//update password => /api/password/update
+export const updatePassword = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req?.user?._id).select("+password");
+
+  //check the previous user password
+  const isPasswordMatch = await user.comparePassword(req.body.oldPassword);
+  if (!isPasswordMatch) {
+    return next(new ErrorHandler("Old password is incorrect", 400));
+  }
+
+  user.password = req.body.password;
+  user.save();
+  res.status(200).json({
+    success: true,
   });
 });
