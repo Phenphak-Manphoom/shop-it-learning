@@ -5,6 +5,7 @@ import { connectDatabase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
 import authRoutes from "./routes/auth.js";
 import cookieParser from "cookie-parser";
+import orderRoutes from "./routes/order.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(express.json()); //middleware เพื่อช่วยในการ
 app.use(cookieParser());
 app.use("/api", productRoutes);
 app.use("/api", authRoutes);
+app.use("/api", orderRoutes);
 
 //using error middleware
 app.use(errorMiddleware);
