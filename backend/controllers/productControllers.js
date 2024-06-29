@@ -67,12 +67,52 @@ export const deleteProduct = catchAsyncError(async (req, res) => {
   let product = await Product.findById(req?.params?.id);
 
   if (!product) {
-    return next(new ErrorHandler("Product Not Found", 400));
+    return next(new ErrorHandler("Product Not Found", 404));
   }
 
   await Product.deleteOne();
 
   res.status(200).json({
     message: "Product Deleted",
+  });
+});
+
+//create/update product review   =>  /api/reviews
+export const createProductReview = catchAsyncError(async (req, res) => {
+  const { rating, comment, productId } = req.body;
+  const review = {
+    user: req?.user?._id,
+    rating: Number(rating),
+    comment,
+  };
+  let product = await Product.findById(productId);
+
+  if (!product) {
+    return next(new ErrorHandler("Product Not Found", 404));
+  }
+
+  const isReview = product?.reviews.find(
+    (r) => r.user.toString() === req?.user?._id.toString()
+  );
+  if (isReview) {
+    product.reviews.forEach((review) => {
+      if (review?.user?.toString() === req?.user?._id.toString()) {
+        review.comment = comment;
+        review.rating = rating;
+      }
+    });
+  } else {
+    product.reviews.push(review);
+    product.numOfReviews = product.reviews.length;
+  }
+
+  product.ratings =
+    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    product.reviews.length;
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
   });
 });
