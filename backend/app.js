@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
-import productRoutes from "./routes/ProductRoutes.js";
+import productRoutes from "./routes/Product.js";
 import { connectDatabase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
 import authRoutes from "./routes/auth.js";
