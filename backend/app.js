@@ -1,10 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
+import productRoutes from "./routes/productRoutes.js";
 
 const app = express();
 dotenv.config({ path: "backend/config/config.env" });
 
-console.log("Hello");
+app.use("/api", productRoutes);
 app.listen(process.env.PORT, () => {
-  console.log(`Server start is on PORT : ${process.env.PORT} in ${process.env.NODE_ENV} mode`);
+  console.log(
+    `Server start is on PORT : ${process.env.PORT} in ${process.env.NODE_ENV} mode`
+  );
 });
