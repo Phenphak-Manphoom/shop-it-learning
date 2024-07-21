@@ -2,8 +2,9 @@ import Product from "../models/products.js";
 
 //Get product => /api/products
 export const getProducts = async (req, res) => {
+  const product = await Product.find();
   res.status(200).json({
-    message: "All Products",
+    product,
   });
 };
 
