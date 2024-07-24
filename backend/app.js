@@ -14,7 +14,7 @@ process.on("uncaughtException", (err) => {
 dotenv.config({ path: "backend/config/config.env" });
 connectDatabase();
 app.use(express.json());
-console.log(Hello);
+
 app.use("/api", productRoutes);
 
 //using middleware
