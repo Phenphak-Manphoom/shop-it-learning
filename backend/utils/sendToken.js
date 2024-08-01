@@ -10,7 +10,7 @@ export default (user, statusCode, res) => {
     ),
     httpOnly: true,
   };
-  console.log(options);
+
   res.status(statusCode).cookie("token", token, options).json({
     token,
   });
