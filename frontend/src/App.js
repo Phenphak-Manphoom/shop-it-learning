@@ -1,18 +1,23 @@
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <div className="flex flex-col m-auto ">
-        <Home />
-      </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <div className="flex flex-col m-auto ">
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
