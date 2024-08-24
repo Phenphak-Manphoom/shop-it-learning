@@ -1,9 +1,17 @@
 import "./App.css";
+import Home from "./components/Home";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
 
 function App() {
   return (
     <div className="App">
-      <h1 className="text-red-600">Hi</h1>
+      <Header />
+      <div className="flex flex-col m-auto ">
+        <Home />
+      </div>
+
+      <Footer />
     </div>
   );
 }
