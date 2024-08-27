@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -8,9 +9,9 @@ function Header() {
   return (
     <nav className="bg-slate-800 dark:bg-gray-900 dark:border-gray-700">
       <div className="max-w-screen-xl flex items-center justify-between p-1 m-auto">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link to={"/"}>
           <img src="../images/shopit_logo.png" className="h-15" alt="Shop IT" />
-        </a>
+        </Link>
         <button
           data-collapse-toggle="navbar-dropdown"
           type="button"
