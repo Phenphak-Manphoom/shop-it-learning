@@ -81,8 +81,8 @@ function Header() {
                 className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0"
                 aria-current="page"
               >
-                <span className="pr-2">Cart</span>
-                <span className="inline-block h-8 w-8 bg-orange-600 text-white text-center rounded-full leading-7 align-middle">
+                <span className="pr-0">Cart</span>
+                <span className="inline-block bg-orange-600  text-white text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
                   0
                 </span>
               </a>
