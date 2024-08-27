@@ -2,10 +2,13 @@ import React from "react";
 import MetaData from "./layout/MetaData";
 import { useGetProductsQuery } from "../redux/api/productApi";
 import ProductItem from "./product/ProductItem";
+import Loader from "./layout/Loader";
 
 function Home() {
   const { data, isLoading } = useGetProductsQuery();
-  console.log(data, isLoading);
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
