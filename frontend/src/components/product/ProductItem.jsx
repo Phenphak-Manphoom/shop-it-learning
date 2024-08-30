@@ -4,7 +4,7 @@ import StarRatings from "react-star-ratings";
 
 function ProductItem({ product }) {
   return (
-    <div className="w-80  mb-6 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-64 mb-6 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <Link to={`/product/${product?._id}`}>
         <img
           className="p-8 rounded-t-lg w-52 h-52 m-auto"
@@ -14,7 +14,7 @@ function ProductItem({ product }) {
       </Link>
       <div className="px-5 pb-5">
         <Link to={`/product/${product?._id}`}>
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="min-h-[4.5rem] leading-[1.5rem] text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
             {product?.name}
           </h5>
         </Link>
