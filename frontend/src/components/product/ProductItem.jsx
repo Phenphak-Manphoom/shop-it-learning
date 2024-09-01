@@ -8,7 +8,11 @@ function ProductItem({ product }) {
       <Link to={`/product/${product?._id}`}>
         <img
           className="p-8 rounded-t-lg w-52 h-52 m-auto"
-          src={product?.images[0]?.url}
+          src={
+            product?.images[0]
+              ? product?.images[0]?.url
+              : "/images/default_product.png"
+          }
           alt={product?.name}
         />
       </Link>
