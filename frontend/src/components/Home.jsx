@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import CustomPagination from "./layout/CustomPagination";
 import { useSearchParams } from "react-router-dom";
 
-function Home() {
+const Home = () => {
   let [searchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
   const params = { page };
@@ -38,6 +38,6 @@ function Home() {
       </div>
     </>
   );
-}
+};
 
 export default Home;

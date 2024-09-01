@@ -1,6 +1,6 @@
 import React from "react";
 
-function Loader() {
+const Loader = () => {
   return (
     <div class="relative flex justify-center items-center mt-36">
       <div class="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-orange-600"></div>
@@ -11,6 +11,6 @@ function Loader() {
       />
     </div>
   );
-}
+};
 
 export default Loader;

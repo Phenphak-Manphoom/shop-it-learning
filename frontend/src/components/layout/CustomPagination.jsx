@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 
-function CustomPagination({ resPerPage, filterProductsCount }) {
+const CustomPagination = ({ resPerPage, filterProductsCount }) => {
   const [currentPage, setCurrentPage] = useState();
   let [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -43,6 +43,6 @@ function CustomPagination({ resPerPage, filterProductsCount }) {
       )}
     </div>
   );
-}
+};
 
 export default CustomPagination;

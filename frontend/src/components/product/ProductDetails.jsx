@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import Loader from "../layout/Loader";
 import StarRatings from "react-star-ratings";
 
-function ProductDetails() {
+const ProductDetails = () => {
   const params = useParams();
   const { data, isLoading, error, isError } = useGetProductDetailsQuery(
     params?.id
@@ -180,6 +180,6 @@ function ProductDetails() {
       </div>
     </div>
   );
-}
+};
 
 export default ProductDetails;

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 
-function ProductItem({ product }) {
+const ProductItem = ({ product }) => {
   return (
     <div className="w-64 mb-6 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <Link to={`/product/${product?._id}`}>
@@ -51,6 +51,6 @@ function ProductItem({ product }) {
       </div>
     </div>
   );
-}
+};
 
 export default ProductItem;
