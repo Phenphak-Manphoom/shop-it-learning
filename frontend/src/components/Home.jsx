@@ -10,7 +10,9 @@ import { useSearchParams } from "react-router-dom";
 const Home = () => {
   let [searchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
-  const params = { page };
+  const keyword = searchParams.get("keyword") || "";
+
+  const params = { page, keyword };
   const { data, isLoading, error, isError } = useGetProductsQuery(params);
 
   useEffect(() => {
@@ -24,17 +26,42 @@ const Home = () => {
   return (
     <>
       <MetaData title={"Buy Best Product Online"} />
-      <div className="m-auto mt-10">
-        <h1 className="pb-10 text-2xl">Latest Products</h1>
-        <div className="grid grid-cols-4 gap-5 m-auto">
-          {data?.products?.map((product) => (
-            <ProductItem product={product} />
-          ))}
+      <div
+        className={
+          keyword
+            ? "grid grid-cols-1 lg:grid-cols-3 gap-10 mt-10"
+            : "grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10"
+        }
+      >
+        {keyword && (
+          <div className="lg:col-span-1 ">
+            <h2 className="text-xl text-center font-semibold ">Filter</h2>
+          </div>
+        )}
+
+        <div
+          className={keyword ? "lg:col-span-2 mr-36" : "lg:col-span-2 m-auto"}
+        >
+          <h1 className="pb-10 text-2xl">
+            {keyword
+              ? `${data?.products?.length} Products found with keyword: ${keyword}`
+              : "Latest Products"}
+          </h1>
+          <div
+            className={
+              keyword ? "grid grid-cols-3 gap-4" : "grid grid-cols-4 gap-6"
+            }
+          >
+            {data?.products?.map((product) => (
+              <ProductItem product={product} key={product.id} />
+            ))}
+          </div>
+
+          <CustomPagination
+            resPerPage={data?.resPerPage}
+            filterProductsCount={data?.filterProductsCount}
+          />
         </div>
-        <CustomPagination
-          resPerPage={data?.resPerPage}
-          filterProductsCount={data?.filterProductsCount}
-        />
       </div>
     </>
   );
