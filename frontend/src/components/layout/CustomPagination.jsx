@@ -24,7 +24,7 @@ const CustomPagination = ({ resPerPage, filterProductsCount }) => {
     navigate(path);
   };
   return (
-    <div className="flex justify-center mb-20 ">
+    <div className="flex justify-center ">
       {filterProductsCount > resPerPage && (
         <Pagination
           className="pagination-custom"
