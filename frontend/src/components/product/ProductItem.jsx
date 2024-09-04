@@ -4,7 +4,7 @@ import StarRatings from "react-star-ratings";
 
 const ProductItem = ({ product }) => {
   return (
-    <div className="w-64 mb-6 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-64  max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <Link to={`/product/${product?._id}`}>
         <img
           className="p-8 rounded-t-lg w-52 h-52 m-auto"
