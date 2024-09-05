@@ -15,11 +15,14 @@ const Home = () => {
   const min = searchParams.get("min");
   const max = searchParams.get("max");
   const category = searchParams.get("category");
+  const ratings = searchParams.get("ratings");
+
   const params = { page, keyword };
 
   min !== null && (params.min = min);
   max !== null && (params.max = max);
   category !== null && (params.category = category);
+  ratings !== null && (params.ratings = ratings);
 
   const { data, isLoading, error, isError } = useGetProductsQuery(params);
 
@@ -48,7 +51,7 @@ const Home = () => {
         )}
 
         <div className="lg:col-span-2 ">
-          <h1 className="text-2xl my-5">
+          <h1 className="text-3xl font-medium my-4">
             {keyword
               ? `${data?.products?.length} Products found with keyword: ${keyword}`
               : "Latest Products"}
