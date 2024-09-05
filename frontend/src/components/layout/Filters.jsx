@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getPriceQueryParams } from "../../helpers/helper";
 import { PRODUCT_CATEGORIES } from "../../constants/constants";
+import StarRatings from "react-star-ratings";
 
 const Filters = () => {
   const [min, setMin] = useState(0);
@@ -116,36 +117,34 @@ const Filters = () => {
       <hr className="my-3" />
 
       <h5 className="text-base font-medium mb-3">Ratings</h5>
-      <div className="mb-2">
-        <input
-          className="form-check-input h-4 w-4 border-gray-300 rounded-sm"
-          type="checkbox"
-          name="ratings"
-          id="check7"
-          value="5"
-        />
-        <label
-          className="ml-2 text-sm font-medium text-gray-700"
-          htmlFor="check7"
-        >
-          <span className="text-yellow-500">★ ★ ★ ★ ★</span>
-        </label>
-      </div>
-      <div className="mb-2">
-        <input
-          className="form-check-input h-4 w-4 border-gray-300 rounded-sm"
-          type="checkbox"
-          name="ratings"
-          id="check8"
-          value="4"
-        />
-        <label
-          className="ml-2 text-sm font-medium text-gray-700"
-          htmlFor="check8"
-        >
-          <span className="text-yellow-500">★ ★ ★ ★ ☆</span>
-        </label>
-      </div>
+      {[5, 4, 3, 2, 1].map((rating) => (
+        <div className="mb-2">
+          <input
+            className="form-check-input h-4 w-4 border-gray-300 rounded-sm"
+            type="checkbox"
+            name="ratings"
+            id="check7"
+            value={rating}
+            defaultChecked={defaultCheckHandler("ratings", rating.toString())}
+            onClick={(e) => handleClick(e.target)}
+          />
+          <label
+            className="ml-2 text-sm font-medium text-gray-700"
+            htmlFor="check7"
+          >
+            <span className="text-yellow-500">
+              <StarRatings
+                rating={rating}
+                starRatedColor="#ffb829"
+                numberOfStars={5}
+                name="rating"
+                starDimension="20px"
+                starSpacing="1px"
+              />
+            </span>
+          </label>
+        </div>
+      ))}
     </div>
   );
 };
