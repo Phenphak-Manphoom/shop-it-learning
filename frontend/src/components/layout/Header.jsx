@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import { useGetMeQuery } from "../../redux/api/userApi";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+
+  const { data } = useGetMeQuery();
 
   return (
     <nav className="bg-slate-800 dark:bg-gray-900 dark:border-gray-700">
@@ -109,7 +112,7 @@ const Header = () => {
               type="button"
               className="text-white bg-orange-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
             >
-              Login
+              <Link to="/login">Login</Link>
             </button>
           </ul>
         </div>
