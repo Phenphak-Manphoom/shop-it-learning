@@ -1,16 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Search from "./Search";
 import { useGetMeQuery } from "../../redux/api/userApi";
 import { useSelector } from "react-redux";
+import { useLazyLogoutQuery } from "../../redux/api/authApi";
 
 const Header = () => {
+
+  const navigate = useNavigate()
   const { isLoading } = useGetMeQuery();
+  const [logout] = useLazyLogoutQuery();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { user } = useSelector((state) => state.auth);
 
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+
+  const logoutHandler = () => {
+    logout();
+    navigate(0)
+  };
 
   return (
     <nav className="bg-slate-800 dark:bg-gray-900 dark:border-gray-700">
@@ -134,6 +144,7 @@ const Header = () => {
                         <Link
                           to="/"
                           className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                          onClick={logoutHandler}
                         >
                           Logout
                         </Link>
