@@ -7,7 +7,7 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     getMe: builder.query({
       query: () => `/me`,
-      transformErrorResponse: (result) => result.user,
+      transformResponse: (result) => result.user,
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
