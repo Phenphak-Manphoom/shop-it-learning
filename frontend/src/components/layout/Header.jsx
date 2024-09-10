@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import { useGetMeQuery } from "../../redux/api/userApi";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const { isLoading } = useGetMeQuery();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+  const { user } = useSelector((state) => state.auth);
 
-  const { data } = useGetMeQuery();
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
   return (
     <nav className="bg-slate-800 dark:bg-gray-900 dark:border-gray-700">
@@ -50,11 +52,11 @@ const Header = () => {
           }`}
           id="navbar-dropdown"
         >
-          <ul className="flex flex-col items-baseline font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="flex   font-medium   rounded-lg md:space-x-8 rtl:space-x-reverse">
             <li>
               <a
-                href="#"
-                className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0"
+                href=""
+                className="flex items-center mt-2  text-white rounded md:bg-transparent md:p-0"
                 aria-current="page"
               >
                 <span className="pr-0">Cart</span>
@@ -64,56 +66,92 @@ const Header = () => {
               </a>
             </li>
 
-            <li>
-              <button
-                id="dropdownNavbarLink"
-                onClick={toggleDropdown}
-                className="flex items-center justify-between w-full py-2 px-3 text-white rounded md:border-0 md:p-0 md:w-auto"
-              >
-                User
-                <svg
-                  className="w-2.5 h-2.5 ms-2.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
+            {user ? (
+              <li>
+                <button
+                  id="dropdownNavbarLink"
+                  onClick={toggleDropdown}
+                  className="flex items-center justify-between w-full  text-white rounded md:border-0 md:p-0 md:w-auto"
                 >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
+                  <figure className="pr-2">
+                    <img
+                      className="w-9 h-9 rounded-full border-2  border-gray-300"
+                      src={
+                        user?.avatar
+                          ? user?.avatar?.url
+                          : "/images/default_avatar.jpg"
+                      }
+                      alt="User Avatar"
+                    />
+                  </figure>
 
-              {isDropdownOpen && (
-                <div className="z-10 mt-4 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600 absolute">
-                  <ul className="py-2 text-sm text-gray-700 dark:text-gray-400">
-                    {["Dashboard", "Orders", "Profile", "Logout"].map(
-                      (item) => (
-                        <li key={item}>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            {item}
-                          </a>
-                        </li>
-                      )
-                    )}
-                  </ul>
-                </div>
-              )}
-            </li>
+                  {user?.name}
+                  <svg
+                    className="w-2.5 h-2.5 ms-2.5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
+                </button>
 
-            <button
-              type="button"
-              className="text-white bg-orange-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
-            >
-              <Link to="/login">Login</Link>
-            </button>
+                {isDropdownOpen && (
+                  <div className="z-10 mt-1 font-medium bg-orange-400   rounded-lg shadow w-40 absolute">
+                    <ul className="py-2 text-sm text-slate-200 dark:text-gray-400">
+                      <li>
+                        <Link
+                          to="/admin/dashboard"
+                          className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Dashboard
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/me/orders"
+                          className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Orders
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/me/profile"
+                          className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/"
+                          className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Logout
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </li>
+            ) : (
+              !isLoading && (
+                <button
+                  type="button"
+                  className="text-white bg-orange-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+                >
+                  <Link to="/login">Login</Link>
+                </button>
+              )
+            )}
           </ul>
         </div>
       </div>
