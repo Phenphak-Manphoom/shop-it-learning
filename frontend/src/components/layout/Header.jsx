@@ -6,8 +6,7 @@ import { useSelector } from "react-redux";
 import { useLazyLogoutQuery } from "../../redux/api/authApi";
 
 const Header = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { isLoading } = useGetMeQuery();
   const [logout] = useLazyLogoutQuery();
 
@@ -19,7 +18,11 @@ const Header = () => {
 
   const logoutHandler = () => {
     logout();
-    navigate(0)
+    navigate(0);
+  };
+
+  const handleLinkClick = () => {
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -120,6 +123,7 @@ const Header = () => {
                         <Link
                           to="/admin/dashboard"
                           className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                          onClick={handleLinkClick}
                         >
                           Dashboard
                         </Link>
@@ -128,6 +132,7 @@ const Header = () => {
                         <Link
                           to="/me/orders"
                           className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                          onClick={handleLinkClick}
                         >
                           Orders
                         </Link>
@@ -136,6 +141,7 @@ const Header = () => {
                         <Link
                           to="/me/profile"
                           className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                          onClick={handleLinkClick}
                         >
                           Profile
                         </Link>
