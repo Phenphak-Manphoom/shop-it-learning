@@ -7,11 +7,11 @@ const Profile = () => {
 
   return (
     <UserLayout>
-      <div className="flex flex-col md:flex-row justify-around mt-5 user-info">
+      <div className="flex flex-col md:flex-row justify-around mt-5 ">
         <div className="w-full md:w-1/4">
           <figure className="avatar">
             <img
-              className="rounded-full object-cover w-full h-auto"
+              className="rounded-full  w-52 h-52"
               src={
                 user?.avatar ? user?.avatar?.url : "/images/default_avatar.jpg"
               }
@@ -28,7 +28,7 @@ const Profile = () => {
           <p className="text-gray-700">{user?.email}</p>
 
           <h4 className="text-lg font-semibold mt-4">Joined On</h4>
-          <p className="text-gray-700">{user?.createdAt?.substring(0,10)}</p>
+          <p className="text-gray-700">{user?.createdAt?.substring(0, 10)}</p>
         </div>
       </div>
     </UserLayout>
