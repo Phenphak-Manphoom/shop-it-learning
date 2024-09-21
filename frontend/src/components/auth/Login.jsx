@@ -118,7 +118,7 @@ const Login = () => {
             <div className="flex flex-wrap items-center justify-between gap-4 mt-6 ">
               <div className="ml-auto">
                 <a
-                  href=""
+                  href="/password/forgot"
                   className="text-blue-600 font-semibold text-sm hover:underline"
                 >
                   Forgot Password?
