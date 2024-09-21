@@ -29,7 +29,7 @@ const Header = () => {
     <nav className="bg-slate-800 dark:bg-gray-900 dark:border-gray-700">
       <div className="max-w-screen-xl flex items-center justify-between p-1 m-auto">
         <Link to={"/"}>
-          <img src="../images/shopit_logo.png" className="h-15" alt="Shop IT" />
+          <img src="/images/shopit_logo.png" className="h-15" alt="Shop IT" />
         </Link>
         <button
           data-collapse-toggle="navbar-dropdown"
