@@ -4,15 +4,19 @@ import { useGetProductDetailsQuery } from "../../redux/api/productApi";
 import toast from "react-hot-toast";
 import Loader from "../layout/Loader";
 import StarRatings from "react-star-ratings";
+import { useDispatch } from "react-redux";
 
 const ProductDetails = () => {
   const params = useParams();
+  const dispatch = useDispatch();
+
+  const [quantity, setQuantity] = useState(1);
+  const [activeImg, setActiveImg] = useState("");
+
   const { data, isLoading, error, isError } = useGetProductDetailsQuery(
     params?.id
   );
   const product = data?.product;
-
-  const [activeImg, setActiveImg] = useState("");
 
   useEffect(() => {
     setActiveImg(
@@ -21,12 +25,22 @@ const ProductDetails = () => {
         : "/images/default_product.png"
     );
   }, [product]);
+
   useEffect(() => {
     if (isError) {
       toast.error(error?.data?.message);
     }
   }, [isError]);
 
+  const increaseQty = () => {
+    if (quantity >= product?.stock) return;
+    setQuantity(quantity + 1);
+  };
+
+  const decreaseQty = () => {
+    if (quantity <= 1) return;
+    setQuantity(quantity - 1);
+  };
   if (isLoading) return <Loader />;
   return (
     <div className="font-sans bg-white">
@@ -100,7 +114,10 @@ const ProductDetails = () => {
             </div>
 
             <div className="flex flex-wrap gap-4 mt-8">
-              <button className="group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
+              <button
+                className="group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300"
+                onClick={decreaseQty}
+              >
                 <svg
                   class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                   width="18"
@@ -123,8 +140,12 @@ const ProductDetails = () => {
                 id="number"
                 className="border border-gray-200 rounded-full w-10 aspect-square outline-none text-gray-900 font-semibold text-sm py-1.5 px-3 bg-gray-100  text-center"
                 placeholder="1"
+                value={quantity}
               />
-              <button className="group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
+              <button
+                className="group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300"
+                onClick={increaseQty}
+              >
                 <svg
                   className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                   width="18"
@@ -145,6 +166,7 @@ const ProductDetails = () => {
               <button
                 type="button"
                 className="min-w-[200px] px-4 py-2.5 border border-blue-600 bg-transparent hover:bg-gray-50 text-gray-800 text-sm font-semibold rounded"
+                disabled={product.stock <= 0}
               >
                 Add to cart
               </button>
