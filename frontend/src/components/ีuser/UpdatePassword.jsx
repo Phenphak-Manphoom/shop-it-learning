@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUpdatePasswordMutation } from "../../redux/api/userApi";
 import toast from "react-hot-toast";
 import UserLayout from "../layout/UserLayout";
+import MetaData from "../layout/MetaData";
 
 const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -37,6 +38,7 @@ const UpdatePassword = () => {
 
   return (
     <UserLayout>
+      <MetaData title={"Update Password"} />
       <div className="flex justify-center wrapper">
         <div className="w-full md:w-4/5 lg:w-2/3">
           <form

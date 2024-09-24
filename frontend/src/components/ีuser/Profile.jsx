@@ -1,12 +1,14 @@
 import React from "react";
 import UserLayout from "../layout/UserLayout";
 import { useSelector } from "react-redux";
+import MetaData from "../layout/MetaData";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
     <UserLayout>
+      <MetaData title={"Your Profile"} />
       <div className="flex flex-col md:flex-row justify-around mt-5 ">
         <div className="w-full md:w-1/4">
           <figure className="avatar">
