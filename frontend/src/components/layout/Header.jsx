@@ -13,6 +13,7 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
@@ -74,7 +75,7 @@ const Header = () => {
               >
                 <span className="pr-0">Cart</span>
                 <span className="inline-block bg-orange-600  text-white text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
-                  0
+                  {cartItems?.length}
                 </span>
               </a>
             </li>
