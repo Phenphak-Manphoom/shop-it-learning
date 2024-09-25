@@ -69,7 +69,7 @@ const Header = () => {
           <ul className="flex   font-medium   rounded-lg md:space-x-8 rtl:space-x-reverse">
             <li>
               <a
-                href=""
+                href="/cart"
                 className="flex items-center mt-2  text-white rounded md:bg-transparent md:p-0"
                 aria-current="page"
               >
