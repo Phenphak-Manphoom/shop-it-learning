@@ -153,6 +153,9 @@ const Cart = () => {
                                 <button
                                   type="button"
                                   className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
+                                  onClick={() =>
+                                    removeCartItemHandler(item?.product)
+                                  }
                                 >
                                   <svg
                                     className="me-1.5 h-5 w-5"
@@ -192,7 +195,7 @@ const Cart = () => {
                       <div className="space-y-2">
                         <dl className="flex items-center justify-between gap-4">
                           <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                            Unit
+                            Subtotal
                           </dt>
                           <dd className="text-base font-medium text-gray-900 dark:text-white">
                             {cartItems?.reduce(
