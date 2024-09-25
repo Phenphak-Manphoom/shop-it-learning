@@ -68,16 +68,15 @@ const Header = () => {
         >
           <ul className="flex   font-medium   rounded-lg md:space-x-8 rtl:space-x-reverse">
             <li>
-              <a
-                href="/cart"
+              <Link
+                to={"/cart"}
                 className="flex items-center mt-2  text-white rounded md:bg-transparent md:p-0"
-                aria-current="page"
               >
                 <span className="pr-0">Cart</span>
                 <span className="inline-block bg-orange-600  text-white text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
                   {cartItems?.length}
                 </span>
-              </a>
+              </Link>
             </li>
 
             {user ? (
