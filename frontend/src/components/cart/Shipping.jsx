@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { saveShippingInfo } from "../../redux/features/cartSlice";
 import MetaData from "../layout/MetaData";
+import CheckoutSteps from "./CheckoutSteps";
 
 const Shipping = () => {
   const countriesList = Object.values(countries);
@@ -38,6 +39,7 @@ const Shipping = () => {
   return (
     <>
       <MetaData title={"Shipping Info"} />
+      <CheckoutSteps shipping />
       <div className="flex justify-center my-16 mx-96">
         <div className="w-full md:w-4/5 lg:w-2/3">
           <form
