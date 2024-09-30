@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import productRoutes from "./routes/productRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 import { connectDatabase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/error.js";
 const app = express();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use("/api", productRoutes);
 app.use("/api", authRoutes);
 app.use("/api", orderRoutes);
+app.use("/api", paymentRoutes);
 
 //using middleware
 app.use(errorMiddleware);
