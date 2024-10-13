@@ -4,9 +4,11 @@ import { useGetProductDetailsQuery } from "../../redux/api/productApi";
 import toast from "react-hot-toast";
 import Loader from "../layout/Loader";
 import StarRatings from "react-star-ratings";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCartItem } from "../../redux/features/cartSlice";
 import MetaData from "../layout/MetaData";
+import NewReview from "../reviews/NewReview";
+import ListReviews from "../reviews/ListReviews";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -19,6 +21,7 @@ const ProductDetails = () => {
     params?.id
   );
   const product = data?.product;
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
     setActiveImg(
@@ -208,18 +211,29 @@ const ProductDetails = () => {
               <p className="pt-4">
                 Sold by: <strong>{product?.seller}</strong>
               </p>
-
-              <div
-                class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mt-4 rounded relative"
-                role="alert"
-                type="alert"
-              >
-                Login to post your review.
-              </div>
+              {isAuthenticated ? (
+                <NewReview productId={product?._id} />
+              ) : (
+                <div
+                  class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mt-4 rounded relative"
+                  role="alert"
+                  type="alert"
+                >
+                  <button
+                    type="button"
+                    className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900"
+                  >
+                    Login to post your review.
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
+      {product?.reviews?.length > 0 && (
+        <ListReviews reviews={product?.reviews} />
+      )}
     </>
   );
 };
