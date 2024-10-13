@@ -86,31 +86,43 @@ const MyOrders = () => {
             )}
           </Table.Head>
           <Table.Body className="bg-white divide-y divide-gray-200">
-            {displayedOrders?.map((order) => (
-              <Table.Row key={order._id}>
-                <Table.Cell>{order?._id}</Table.Cell>
-                <Table.Cell>฿{order?.totalAmount}</Table.Cell>
-                <Table.Cell>
-                  {order?.paymentInfo?.status?.toUpperCase()}
-                </Table.Cell>
-                <Table.Cell>{order?.orderStatus}</Table.Cell>
-                <Table.Cell>
-                  <Link
-                    to={`/me/order/${order._id}`}
-                    className="text-blue-600 hover:underline"
-                  >
-                    <FaEye className="w-5 h-5 inline" />
-                  </Link>
-                  <Link
-                    to={`/invoice/order/${order._id}`}
-                    className="text-green-600 hover:underline ml-2"
-                  >
-                    <FaPrint className="w-5 h-5 inline" />
-                  </Link>
+            {displayedOrders?.length > 0 ? (
+              displayedOrders.map((order) => (
+                <Table.Row key={order._id}>
+                  <Table.Cell>{order?._id}</Table.Cell>
+                  <Table.Cell>฿{order?.totalAmount}</Table.Cell>
+                  <Table.Cell>
+                    {order?.paymentInfo?.status?.toUpperCase()}
+                  </Table.Cell>
+                  <Table.Cell>{order?.orderStatus}</Table.Cell>
+                  <Table.Cell>
+                    <Link
+                      to={`/me/order/${order._id}`}
+                      className="text-blue-600 hover:underline"
+                    >
+                      <FaEye className="w-5 h-5 inline" />
+                    </Link>
+                    <Link
+                      to={`/invoice/order/${order._id}`}
+                      className="text-green-600 hover:underline ml-2"
+                    >
+                      <FaPrint className="w-5 h-5 inline" />
+                    </Link>
+                  </Table.Cell>
+                </Table.Row>
+              ))
+            ) : (
+              <Table.Row>
+                <Table.Cell
+                  colSpan={5}
+                  className="text-center py-4 text-2xl font-medium"
+                >
+                  You have no orders yet
                 </Table.Cell>
               </Table.Row>
-            ))}
+            )}
           </Table.Body>
+
           {/* Table Footer */}
           <Table.Head>
             {["ID", "Amount", "Payment Status", "Order Status", "Actions"].map(
