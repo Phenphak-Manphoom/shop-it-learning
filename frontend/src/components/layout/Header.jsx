@@ -120,13 +120,15 @@ const Header = () => {
                   <div className="z-10 mt-1 font-medium bg-orange-400   rounded-lg shadow w-40 absolute">
                     <ul className="py-2 text-sm text-slate-200 dark:text-gray-400">
                       <li>
-                        <Link
-                          to="/admin/dashboard"
-                          className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
-                          onClick={handleLinkClick}
-                        >
-                          Dashboard
-                        </Link>
+                        {user?.role === "admin" && (
+                          <Link
+                            to="/admin/dashboard"
+                            className="block px-4 py-2 hover:bg-slate-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                            onClick={handleLinkClick}
+                          >
+                            Dashboard
+                          </Link>
+                        )}
                       </li>
                       <li>
                         <Link
