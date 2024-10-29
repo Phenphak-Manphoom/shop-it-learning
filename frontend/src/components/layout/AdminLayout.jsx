@@ -44,7 +44,9 @@ const AdminLayout = ({ children }) => {
           <div className="w-full lg:w-1/4 mb-4 lg:mb-0 ">
             <SideMenu menuItems={menuItems} />
           </div>
-          <div className="w-full lg:w-2/3">{children}</div>
+          <div className="w-full lg:w-3/4 overflow-y-auto px-4 min-h-screen">
+            {children}
+          </div>
         </div>
       </div>
     </>
