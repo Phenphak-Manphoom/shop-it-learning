@@ -38,7 +38,7 @@ const Dashboard = () => {
   if (isLoading) return <Loader />;
   return (
     <AdminLayout>
-      <MetaData title={"Admin Products"} />
+      <MetaData title={"Admin Dashboard"} />
       <div className="flex justify-start items-center ">
         <div className="mb-3 mr-4">
           <label className="block">Start Date</label>
