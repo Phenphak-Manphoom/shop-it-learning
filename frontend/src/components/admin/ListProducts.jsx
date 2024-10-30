@@ -6,11 +6,20 @@ import MetaData from "../layout/MetaData";
 import { Table } from "flowbite-react";
 import { FaPen, FaImage, FaTrash } from "react-icons/fa";
 import Pagination from "react-js-pagination";
-import { useGetAdminProductsQuery } from "../../redux/api/productApi";
+import {
+  useDeleteProductMutation,
+  useGetAdminProductsQuery,
+} from "../../redux/api/productApi";
 import AdminLayout from "../layout/AdminLayout";
 
 const ListProducts = () => {
   const { data, isLoading, error } = useGetAdminProductsQuery();
+
+  const [
+    deleteProduct,
+    { isLoading: isDeleteLoading, error: deleteError, isSuccess },
+  ] = useDeleteProductMutation();
+
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,8 +28,18 @@ const ListProducts = () => {
 
   useEffect(() => {
     if (error) toast.error(error?.data?.message);
-  }, [error]);
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
 
+    if (isSuccess) {
+      toast.success("Product Deleted");
+    }
+  }, [error, deleteError, isSuccess]);
+
+  const deleteProductHandler = (id) => {
+    deleteProduct(id);
+  };
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     navigate(`?page=${pageNumber}`);
@@ -95,7 +114,11 @@ const ListProducts = () => {
                       >
                         <FaImage className="w-5 h-5 inline" />
                       </Link>
-                      <button className="text-red-600 hover:underline ml-2">
+                      <button
+                        className="text-red-600 hover:underline ml-2"
+                        onClick={() => deleteProductHandler(product?._id)}
+                        disabled={isDeleteLoading}
+                      >
                         <FaTrash className="w-5 h-5 inline" />
                       </button>
                     </Table.Cell>
