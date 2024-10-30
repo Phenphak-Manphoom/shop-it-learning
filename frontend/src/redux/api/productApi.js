@@ -49,6 +49,45 @@ export const productApi = createApi({
       },
       invalidatesTags: ["AdminProducts"],
     }),
+    updateProduct: builder.mutation({
+      query({ id, body }) {
+        return {
+          url: `/admin/products/${id}`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Product", "AdminProducts"],
+    }),
+    uploadProductImages: builder.mutation({
+      query({ id, body }) {
+        return {
+          url: `/admin/products/${id}/upload_images`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Product"],
+    }),
+    deleteProductImage: builder.mutation({
+      query({ id, body }) {
+        return {
+          url: `/admin/products/${id}/delete_image`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Product"],
+    }),
+    deleteProduct: builder.mutation({
+      query(id) {
+        return {
+          url: `/admin/products/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["AdminProducts"],
+    }),
   }),
 });
 
@@ -59,4 +98,8 @@ export const {
   useCanUserReviewQuery,
   useGetAdminProductsQuery,
   useCreateProductMutation,
+  useUpdateProductMutation,
+  useUploadProductImagesMutation,
+  useDeleteProductImageMutation,
+  useDeleteProductMutation,
 } = productApi;
