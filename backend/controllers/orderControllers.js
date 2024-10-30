@@ -158,7 +158,6 @@ async function getSalesData(startDate, endDate) {
     sales: (salesMap.get(date) || { sales: 0 }).sales,
     numOrders: (salesMap.get(date) || { numOrders: 0 }).numOrders,
   }));
-  console.log(finalSalesData);
 
   return { salesData: finalSalesData, totalSales, totalNumOrders };
 }
