@@ -173,7 +173,7 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
 
 //get product review => /api/reviews
 export const getProductReview = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.query.id);
+  const product = await Product.findById(req.query.id).populate("reviews.user");
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
@@ -186,14 +186,14 @@ export const getProductReview = catchAsyncErrors(async (req, res, next) => {
 
 //delete product review => /api/admin/reviews
 export const deleteReview = catchAsyncErrors(async (req, res, next) => {
-  let product = await Product.findById(req.query.productId);
+  let product = await Product.findById(req.body.productId);
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }
 
   const reviews = product?.reviews?.filter(
-    (review) => review._id.toString() !== req?.query?.id.toString()
+    (review) => review._id.toString() !== req?.body?.id.toString()
   );
 
   const numOfReviews = reviews.length;
