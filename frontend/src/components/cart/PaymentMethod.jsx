@@ -28,6 +28,7 @@ const PaymentMethod = () => {
     if (checkoutData) {
       window.location.href = checkoutData?.url;
     }
+
     if (checkoutError) {
       toast.error(checkoutError?.data?.message);
     }
@@ -77,6 +78,7 @@ const PaymentMethod = () => {
         taxAmount: taxPrice,
         totalAmount: totalPrice,
       };
+
       stripeCheckoutSession(orderData);
     }
   };
