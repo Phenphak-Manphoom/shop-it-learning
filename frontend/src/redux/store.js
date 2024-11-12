@@ -20,6 +20,6 @@ export const store = configureStore({
       productApi.middleware,
       authApi.middleware,
       userApi.middleware,
-      orderApi.middleware
+      orderApi.middleware,
     ),
 });
